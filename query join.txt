@@ -1,0 +1,46 @@
+1)SELECT students.name,students.surname,degrees.name
+FROM `students`
+INNER JOIN `degrees`
+ON students.degree_id=degrees.id
+WHERE degrees.name LIKE '%Corso di laurea ed economia %'
+-------
+
+2)SELECT *
+FROM departments
+INNER JOIN degrees
+ON departments.id = degrees.department_id
+WHERE departments.name = 'Dipartimento di Neuroscienze' AND degrees.name LIKE '%magistrale%';
+-------------
+3)SELECT *
+FROM `course_teacher`
+INNER JOIN courses
+ON courses.id=course_teacher.course.id
+WHERE teacher_id=44;
+----------------------
+4)SELECT students.id, students.surname,students.name, degrees.name, departments.name
+FROM students
+INNER JOIN degrees
+ON degrees.id = students.degree_id
+INNER JOIN departments
+ON departments.id = degrees.department_id
+ORDER BY students.surname ASC, students.name ASC;
+---------------------------------------------------
+5)SELECT 
+degrees.name AS nome_corso_di_laurea,
+courses.name AS nome_del_corso_della_laurea,
+teachers.surname AS insegnante
+FROM degrees, courses, teachers
+JOIN course_teacher
+ON course_teacher.teacher_id = teachers.id
+WHERE degree_id=courses.id;
+---------------------------------
+6)SELECT DISTINCT teachers.surname,teachers.name
+FROM teachers, course_teacher
+JOIN courses
+ON courses.id=course_teacher.course_id
+JOIN degrees
+ON degress.id=courses.degree_id
+JOIN departments
+ON degrees.department_id=departments.id
+WHERE departments.id= 5 AND teachers.id=course_teacher.teacher_id;
+-------------------------------------------
